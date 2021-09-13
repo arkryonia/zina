@@ -10,10 +10,10 @@ from pydantic import (
 
 class Settings(BaseSettings):
     APP_NAME: str = "zina"
-    ORIGINS: str = os.getenv("ORIGINS", "*")
+    ORIGINS: str = os.getenv("ORIGINS", "*")    
 
-    def DB_URI(self):
-        LOCALE_DB: str = f"postgresql://postgres:postgres@localhost/{self.APP_NAME}_db"
+    def get_db_uri(self):
+        LOCALE_DB: str = f"postgres://postgres:postgres@localhost/{self.APP_NAME}_db"
         db_uri: str = os.getenv("DATABASE_URL", LOCALE_DB)
 
         if db_uri.startswith("postgres://"):
